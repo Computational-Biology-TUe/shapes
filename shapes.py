@@ -1,9 +1,10 @@
-def triangle(base: int) -> None:
+def triangle(base: int, fill: bool = False) -> None:
   """
   prints a triangle of width 'base' using '*' characters.
 
   Arguments:
     - base : integer, should be uneven
+    - fill : bool, whether to fill the shape
   
   Returns:
     -
@@ -20,7 +21,10 @@ def triangle(base: int) -> None:
 
   # add edges
   while base > 1:
-    layers.append(whitespace*" " + "*" + (base-2)*" " + "*" + whitespace * " ")
+    if fill:
+      layers.append(whitespace*" " + "*"*base + whitespace * " ")
+    else:
+      layers.append(whitespace*" " + "*" + (base-2)*" " + "*" + whitespace * " ")
     base -= 2
     whitespace += 1
   
@@ -58,4 +62,4 @@ def rectangle(width:int, height:int) -> None:
 
   print("\n".join(layers))
 
-rectangle(1, 0)
+triangle(7, False)
