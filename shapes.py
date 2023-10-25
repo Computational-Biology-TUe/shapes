@@ -1,11 +1,12 @@
 from saving import save_shape
 
-def triangle(base: int, savefile: None | str = None) -> None:
+def triangle(base: int, fill: bool = False, savefile: None | str = None) -> None:
   """
   prints a triangle of width 'base' using '*' characters.
 
   Arguments:
     - base     : integer, should be uneven
+    - fill     : bool, whether to fill the shape
     - savefile : None or str, if a string is given, saves the shape to a
                  file with name `savefile`. If no extension is given, the
                  file will receive the .txt extension.
@@ -25,7 +26,10 @@ def triangle(base: int, savefile: None | str = None) -> None:
 
   # add edges
   while base > 1:
-    layers.append(whitespace*" " + "*" + (base-2)*" " + "*" + whitespace * " ")
+    if fill:
+      layers.append(whitespace*" " + "*"*base + whitespace * " ")
+    else:
+      layers.append(whitespace*" " + "*" + (base-2)*" " + "*" + whitespace * " ")
     base -= 2
     whitespace += 1
   
@@ -37,13 +41,16 @@ def triangle(base: int, savefile: None | str = None) -> None:
 
   print("\n".join(reversed(layers)))
 
-def rectangle(width:int, height:int, savefile: None | str = None) -> None:
+  
+def rectangle(width:int, height:int, fill: bool = False, savefile: None | str = None) -> None:
+
   """
   prints a rectangle of size 'width' x 'height using '*' characters.
 
   Arguments:
     - width    : integer, should be larger than 0
-    - height   : integer, should be larger than 0
+    - height.  : integer, should be larger than 0
+    - fill     : bool, whether to fill the shape
     - savefile : None or str, if a string is given, saves the shape to a
                  file with name `savefile`. If no extension is given, the
                  file will receive the .txt extension.
@@ -57,23 +64,20 @@ def rectangle(width:int, height:int, savefile: None | str = None) -> None:
   if height <= 0:
     raise ValueError(f"height must be larger than 0, {height} <= 0")
 
-
-  # add base
-  layers = [width*"*"]
-  height -= 1
-  while height > 1:
-    layers.append( "*" + (width > 1) * ((width-2)*" " + "*"))
+  if fill:
+    layers = height*[width*"*"]
+  else:
+    # add base
+    layers = [width*"*"]
     height -= 1
-  
-  layers.append(width*'*')
+    while height > 1:
+      layers.append( "*" + (width > 1) * ((width-2)*" " + "*"))
+      height -= 1
+    
+    layers.append(width*'*')
 
   if savefile is not None:
     save_shape("\n".join(reversed(layers)), savefile)
 
 
   print("\n".join(layers))
-
-triangle(5, "testfiles/testtriangle")
-triangle(5, "testfiles/testtriangle.triangle")
-
-rectangle(3, 5)
