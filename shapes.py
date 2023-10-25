@@ -1,10 +1,15 @@
-def triangle(base: int, fill: bool = False) -> None:
+from saving import save_shape
+
+def triangle(base: int, fill: bool = False, savefile: None | str = None) -> None:
   """
   prints a triangle of width 'base' using '*' characters.
 
   Arguments:
-    - base : integer, should be uneven
-    - fill : bool, whether to fill the shape
+    - base     : integer, should be uneven
+    - fill     : bool, whether to fill the shape
+    - savefile : None or str, if a string is given, saves the shape to a
+                 file with name `savefile`. If no extension is given, the
+                 file will receive the .txt extension.
   
   Returns:
     -
@@ -31,17 +36,25 @@ def triangle(base: int, fill: bool = False) -> None:
   # add top
   layers.append(whitespace*" " + "*" + whitespace*" ")
   
+  if savefile is not None:
+    save_shape("\n".join(reversed(layers)), savefile)
+
   print("\n".join(reversed(layers)))
 
-def rectangle(width:int, height:int, fill: bool = False) -> None:
+  
+def rectangle(width:int, height:int, fill: bool = False, savefile: None | str = None) -> None:
+
   """
   prints a rectangle of size 'width' x 'height using '*' characters.
 
   Arguments:
-    - width  : integer, should be larger than 0
-    - height : integer, should be larger than 0
-    - fill   : bool, whether to fill the shape
-
+    - width    : integer, should be larger than 0
+    - height.  : integer, should be larger than 0
+    - fill     : bool, whether to fill the shape
+    - savefile : None or str, if a string is given, saves the shape to a
+                 file with name `savefile`. If no extension is given, the
+                 file will receive the .txt extension.
+  
   Returns:
     - 
   """
@@ -63,6 +76,8 @@ def rectangle(width:int, height:int, fill: bool = False) -> None:
     
     layers.append(width*'*')
 
-  print("\n".join(layers))
+  if savefile is not None:
+    save_shape("\n".join(reversed(layers)), savefile)
 
-rectangle(7, 3, True)
+
+  print("\n".join(layers))
