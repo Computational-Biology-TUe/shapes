@@ -33,14 +33,15 @@ def triangle(base: int, fill: bool = False) -> None:
   
   print("\n".join(reversed(layers)))
 
-def rectangle(width:int, height:int) -> None:
+def rectangle(width:int, height:int, fill: bool = False) -> None:
   """
   prints a rectangle of size 'width' x 'height using '*' characters.
 
   Arguments:
     - width  : integer, should be larger than 0
     - height : integer, should be larger than 0
-  
+    - fill   : bool, whether to fill the shape
+
   Returns:
     - 
   """
@@ -50,16 +51,18 @@ def rectangle(width:int, height:int) -> None:
   if height <= 0:
     raise ValueError(f"height must be larger than 0, {height} <= 0")
 
-
-  # add base
-  layers = [width*"*"]
-  height -= 1
-  while height > 1:
-    layers.append( "*" + (width > 1) * ((width-2)*" " + "*"))
+  if fill:
+    layers = height*[width*"*"]
+  else:
+    # add base
+    layers = [width*"*"]
     height -= 1
-  
-  layers.append(width*'*')
+    while height > 1:
+      layers.append( "*" + (width > 1) * ((width-2)*" " + "*"))
+      height -= 1
+    
+    layers.append(width*'*')
 
   print("\n".join(layers))
 
-triangle(7, False)
+rectangle(7, 3, True)
