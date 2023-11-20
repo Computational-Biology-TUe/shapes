@@ -81,3 +81,27 @@ def rectangle(width:int, height:int, fill: bool = False, savefile: None | str = 
 
 
   print("\n".join(layers))
+
+
+def hexagon(edge_length: int = 2) -> None:
+  """
+  draws a hexagon of with edges of size 'edge_length' using the turtle package
+
+  Arguments:
+    - edge_length : integer, should be equal or larger than 0 and and uneven number
+  
+  Returns:
+    - 
+  """
+  import turtle
+  
+  if (edge_length <= 0):
+    raise ValueError(f"edge length must be larger than 0, {edge_length} <= 0")
+
+  turtle.pendown()
+  for _ in range(6):
+      turtle.forward(edge_length)
+      turtle.left(60)
+  turtle.penup()
+
+  print(";) got you there")
